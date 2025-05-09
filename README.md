@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📊 Satisfaction of Adult Income Dataset
+# 💼 Satisfaction of Adult Income Dataset
 
 ### 📝 Introduction  
 This dataset provides demographic and employment-related information to **predict whether an individual earns more than $50K annually**.  
@@ -40,7 +40,7 @@ It helps organizations and analysts uncover **income distribution patterns** bas
 
 ---
 
-## 🧾 Description of Data Columns
+## 🧾 Description of Columns
 
 | Column Name       | Description |
 |--------------------|-------------|
