@@ -23,7 +23,7 @@ It helps organizations and analysts uncover **income distribution patterns** bas
 
 ---
 
-## ❓ Key Data Analysis Questions
+## Data Analysis Questions
 
 1. 📚 What is the distribution of income levels across different education levels?  
 2. 🎂 What is the average age of individuals earning more than $50K?  
