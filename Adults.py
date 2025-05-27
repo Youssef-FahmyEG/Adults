@@ -473,14 +473,14 @@ with tab3:
         filtered_without_outlier_df = filtered_without_outlier_df[filtered_without_outlier_df["native-country"].isin(country)]
 
  # The distribution of income levels across different education levels?
-  grouped = filtered_without_outlier_df.groupby("education")["income_classification"].value_counts().sort_values(ascending=False).reset_index(name="count")
+    grouped = filtered_without_outlier_df.groupby("education")["income_classification"].value_counts().sort_values(ascending=False).reset_index(name="count")
 
-  green_shades = {
+    green_shades = {
     "Low": "#a1d99b",
     "High": "#006d2c"
 }
 
-  fig = px.bar(
+   fig = px.bar(
     grouped,
     x="education",
     y="count",
@@ -495,7 +495,7 @@ with tab3:
     color_discrete_map=green_shades
 )
 
-  fig.update_layout(
+   fig.update_layout(
     title={
         'text': "Income Distribution by Education Level",
         'x': 0.5,
@@ -514,17 +514,17 @@ with tab3:
     width=800
 )
 
-  st.plotly_chart(fig, key="chart_1")
+   st.plotly_chart(fig, key="chart_1")
 
   #----------------------------------------
 
-  gender_distribution_high_income = filtered_without_outlier_df[filtered_without_outlier_df["income_classification"] == "High"]["sex"].value_counts()
+   gender_distribution_high_income = filtered_without_outlier_df[filtered_without_outlier_df["income_classification"] == "High"]["sex"].value_counts()
 
-  gender_colors = {
+   gender_colors = {
     "Male": "#006d2c",
     "Female": "#a1d99b"
 }
-  fig = px.pie(
+   fig = px.pie(
     names=gender_distribution_high_income.index,
     values=gender_distribution_high_income.values,
     color=gender_distribution_high_income.index,
@@ -532,8 +532,8 @@ with tab3:
 
 )
 
-  fig.update_traces(textinfo="percent+label")
-  fig.update_layout(
+ fig.update_traces(textinfo="percent+label")
+ fig.update_layout(
     title={
         'text': "Gender Distribution (High Income)",
         'x': 0.5,
