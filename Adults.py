@@ -90,25 +90,25 @@ with tab1:
     st.plotly_chart(fig)
 
 with tab2:
+    
+    df_with_outlier = pd.read_csv("cleaned_without_outlierv2.csv")
 
-  df_with_outlier = pd.read_csv("cleaned_without_outlierv2.csv")
+   filtered_outlier_df = df_with_outlier.copy()
 
-  filtered_outlier_df = df_with_outlier.copy()
+   if gender:
+       
+       filtered_outlier_df = filtered_outlier_df[filtered_outlier_df["sex"].isin(gender)]
 
-  if gender:
+   if race:
+       filtered_outlier_df = filtered_outlier_df[filtered_outlier_df["race"].isin(race)]
 
-    filtered_outlier_df = filtered_outlier_df[filtered_outlier_df["sex"].isin(gender)]
-
-  if race:
-    filtered_outlier_df = filtered_outlier_df[filtered_outlier_df["race"].isin(race)]
-
-  if country:
-    filtered_outlier_df = filtered_outlier_df[filtered_outlier_df["native-country"].isin(country)]
+   if country:
+       filtered_outlier_df = filtered_outlier_df[filtered_outlier_df["native-country"].isin(country)]
 
  # The distribution of income levels across different education levels?
-  grouped = filtered_outlier_df.groupby("education")["income_classification"].value_counts().sort_values(ascending=False).reset_index(name="count")
+   grouped = filtered_outlier_df.groupby("education")["income_classification"].value_counts().sort_values(ascending=False).reset_index(name="count")
 
-  fig = px.bar(
+   fig = px.bar(
         grouped,
         x="education",
         y="count",
@@ -122,7 +122,7 @@ with tab2:
         }
     )
 
-  fig.update_layout(
+   fig.update_layout(
     title={
         'text': "Income Distribution by Education Level",
         'x': 0.5,
@@ -142,23 +142,23 @@ with tab2:
     width=800
 )
 
-  st.plotly_chart(fig)
+   st.plotly_chart(fig)
 
-  st.markdown('''
+   st.markdown('''
   The chart shows that most people with lower education levels like **High School** and **Some college** have low income.
   People with higher education like **Bachelors** and **Masters** are more likely to have high income.
               ''')
 
 # What is the gender distribution among high-income earners?
-  gender_distribution_high_income = filtered_outlier_df[filtered_outlier_df["income_classification"] == "High"]["sex"].value_counts()
+   gender_distribution_high_income = filtered_outlier_df[filtered_outlier_df["income_classification"] == "High"]["sex"].value_counts()
 
-  fig = px.pie(
+   fig = px.pie(
     names=gender_distribution_high_income.index,
     values=gender_distribution_high_income.values)
 
-  fig.update_traces(textinfo="percent+label")
+   fig.update_traces(textinfo="percent+label")
 
-  fig.update_layout(
+   fig.update_layout(
     title={
         'text': "Gender Distribution (High Income)",
         'x': 0.5,
@@ -172,25 +172,25 @@ with tab2:
 )
 
 
-  st.plotly_chart(fig)
+   st.plotly_chart(fig)
 
-  st.markdown('''
+   st.markdown('''
   The chart shows that **males** represent the majority of high-income earners compared to **females**.
   ''')
 
   # Which occupations are most represented among those earning >$50K?
-top_occupations_high_income = df[df["income"] == ">50K"]["occupation"].value_counts().head(10)
-top_occupations_high_income_df = top_occupations_high_income.reset_index()
-top_occupations_high_income_df.columns = ['Occupation', 'Count']
+ top_occupations_high_income = df[df["income"] == ">50K"]["occupation"].value_counts().head(10)
+ top_occupations_high_income_df = top_occupations_high_income.reset_index()
+ top_occupations_high_income_df.columns = ['Occupation', 'Count']
 
-fig = px.bar(
+ fig = px.bar(
     top_occupations_high_income_df,
     x='Count',
     y='Occupation',
     orientation='h'
 )
 
-fig.update_layout(
+ fig.update_layout(
     title={
         'text': "Top Occupations (High Income)",
         'x': 0.5,
@@ -204,16 +204,16 @@ fig.update_layout(
     yaxis=dict(autorange="reversed")
 )
 
-st.plotly_chart(fig)
+ st.plotly_chart(fig)
 
-st.markdown('''
+ st.markdown('''
   The chart shows that the highest-paying occupations are **professional specialties** and **executive-managerial roles**, followed by **sales** and **craft-related jobs**.
               ''')
 
   # What is the correlation between weekly work hours and income?
-correlation = round(filtered_outlier_df["hours-per-week"].corr(filtered_outlier_df["income_numeric"]),2)
+ correlation = round(filtered_outlier_df["hours-per-week"].corr(filtered_outlier_df["income_numeric"]),2)
 
-fig = px.scatter(
+ fig = px.scatter(
     filtered_outlier_df,
     x="hours-per-week",
     y="income_numeric",
@@ -224,7 +224,7 @@ fig = px.scatter(
     }
 )
 
-fig.update_layout(
+ fig.update_layout(
     title={
         'text': f"Income vs Hours per Week (Correlation = {correlation})",
         'x': 0.5,
@@ -237,16 +237,16 @@ fig.update_layout(
     width=800
 )
 
-st.plotly_chart(fig)
+ st.plotly_chart(fig)
 
-st.markdown('''
+ st.markdown('''
   The chart shows that there is a **weak positive correlation** between hours worked per week and income level''')
 
   # Which top 10 countries are most common among high-income individuals?
 
-top_countries_high_income = filtered_outlier_df[filtered_outlier_df["income_classification"] == "High"]["native-country"].value_counts().reset_index().head(10)
+ top_countries_high_income = filtered_outlier_df[filtered_outlier_df["income_classification"] == "High"]["native-country"].value_counts().reset_index().head(10)
 
-fig = px.choropleth(
+ fig = px.choropleth(
     top_countries_high_income,
     locations="native-country",
     locationmode="country names",
@@ -255,7 +255,7 @@ fig = px.choropleth(
     title="Top 10 Countries with High Income"
 )
 
-fig.update_layout(
+ fig.update_layout(
     height=800,
     width=800,
     title={
@@ -267,16 +267,16 @@ fig.update_layout(
 )
 
 
-st.plotly_chart(fig)
+ st.plotly_chart(fig)
 
-st.markdown('''
+ st.markdown('''
   The chart illustrates the distribution of **the top 10 high-income countries** on a world map, where the **blue** color gradient reflects the number of high-income individuals. **The United States** stands out as one of the leading countries.''')
 
   # Does marital status influence income level?
 
-income_by_marital_status = filtered_outlier_df.groupby("marital-status")["income_classification"].value_counts().sort_values(ascending = False).reset_index(name="count")
+ income_by_marital_status = filtered_outlier_df.groupby("marital-status")["income_classification"].value_counts().sort_values(ascending = False).reset_index(name="count")
 
-fig = px.bar(
+ fig = px.bar(
     income_by_marital_status,
     x="marital-status",
     y="count",
@@ -285,7 +285,7 @@ fig = px.bar(
     title="Income Classification by Marital Status"
 )
 
-fig.update_layout(
+ fig.update_layout(
     xaxis_title="Marital Status",
     yaxis_title="Count",
     height=800,
@@ -297,16 +297,16 @@ fig.update_layout(
         'font': {'size': 24}
     }
 )
-st.plotly_chart(fig)
+ st.plotly_chart(fig)
 
-st.markdown('''
+ st.markdown('''
   The chart shows that **never-married** and **married-civ-spouse** individuals represent the highest counts of **low-income** earners, while **married-civ-spouse** individuals also have a significant number of high-income earners.''')
 
   # How does education-num relate to income?
 
-avg_education_num_by_income = filtered_outlier_df.groupby("income_classification")["education-num"].mean()
+ avg_education_num_by_income = filtered_outlier_df.groupby("income_classification")["education-num"].mean()
 
-fig = px.pie(
+ fig = px.pie(
     names=avg_education_num_by_income.index,
     values=avg_education_num_by_income.values,
     title="Average Education Level by Income",
@@ -325,7 +325,6 @@ fig.update_layout(
         'font': {'size': 24}
     }
 )
-
 st.plotly_chart(fig)
 
 st.markdown('''
