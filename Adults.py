@@ -480,7 +480,7 @@ with tab3:
     "High": "#006d2c"
 }
 
-   fig = px.bar(
+fig = px.bar(
     grouped,
     x="education",
     y="count",
@@ -495,7 +495,7 @@ with tab3:
     color_discrete_map=green_shades
 )
 
-   fig.update_layout(
+fig.update_layout(
     title={
         'text': "Income Distribution by Education Level",
         'x': 0.5,
@@ -514,7 +514,7 @@ with tab3:
     width=800
 )
 
-   st.plotly_chart(fig, key="chart_1")
+st.plotly_chart(fig, key="chart_1")
 
   #----------------------------------------
 
