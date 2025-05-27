@@ -206,14 +206,14 @@ fig.update_layout(
 
 st.plotly_chart(fig)
 
-  st.markdown('''
+st.markdown('''
   The chart shows that the highest-paying occupations are **professional specialties** and **executive-managerial roles**, followed by **sales** and **craft-related jobs**.
               ''')
 
   # What is the correlation between weekly work hours and income?
-  correlation = round(filtered_outlier_df["hours-per-week"].corr(filtered_outlier_df["income_numeric"]),2)
+correlation = round(filtered_outlier_df["hours-per-week"].corr(filtered_outlier_df["income_numeric"]),2)
 
-  fig = px.scatter(
+fig = px.scatter(
     filtered_outlier_df,
     x="hours-per-week",
     y="income_numeric",
@@ -224,7 +224,7 @@ st.plotly_chart(fig)
     }
 )
 
-  fig.update_layout(
+fig.update_layout(
     title={
         'text': f"Income vs Hours per Week (Correlation = {correlation})",
         'x': 0.5,
@@ -237,16 +237,16 @@ st.plotly_chart(fig)
     width=800
 )
 
-  st.plotly_chart(fig)
+st.plotly_chart(fig)
 
-  st.markdown('''
+st.markdown('''
   The chart shows that there is a **weak positive correlation** between hours worked per week and income level''')
 
   # Which top 10 countries are most common among high-income individuals?
 
-  top_countries_high_income = filtered_outlier_df[filtered_outlier_df["income_classification"] == "High"]["native-country"].value_counts().reset_index().head(10)
+top_countries_high_income = filtered_outlier_df[filtered_outlier_df["income_classification"] == "High"]["native-country"].value_counts().reset_index().head(10)
 
-  fig = px.choropleth(
+fig = px.choropleth(
     top_countries_high_income,
     locations="native-country",
     locationmode="country names",
@@ -255,7 +255,7 @@ st.plotly_chart(fig)
     title="Top 10 Countries with High Income"
 )
 
-  fig.update_layout(
+fig.update_layout(
     height=800,
     width=800,
     title={
@@ -267,16 +267,16 @@ st.plotly_chart(fig)
 )
 
 
-  st.plotly_chart(fig)
+st.plotly_chart(fig)
 
-  st.markdown('''
+st.markdown('''
   The chart illustrates the distribution of **the top 10 high-income countries** on a world map, where the **blue** color gradient reflects the number of high-income individuals. **The United States** stands out as one of the leading countries.''')
 
   # Does marital status influence income level?
 
-  income_by_marital_status = filtered_outlier_df.groupby("marital-status")["income_classification"].value_counts().sort_values(ascending = False).reset_index(name="count")
+income_by_marital_status = filtered_outlier_df.groupby("marital-status")["income_classification"].value_counts().sort_values(ascending = False).reset_index(name="count")
 
-  fig = px.bar(
+fig = px.bar(
     income_by_marital_status,
     x="marital-status",
     y="count",
@@ -285,7 +285,7 @@ st.plotly_chart(fig)
     title="Income Classification by Marital Status"
 )
 
-  fig.update_layout(
+fig.update_layout(
     xaxis_title="Marital Status",
     yaxis_title="Count",
     height=800,
@@ -297,25 +297,25 @@ st.plotly_chart(fig)
         'font': {'size': 24}
     }
 )
-  st.plotly_chart(fig)
+st.plotly_chart(fig)
 
-  st.markdown('''
+st.markdown('''
   The chart shows that **never-married** and **married-civ-spouse** individuals represent the highest counts of **low-income** earners, while **married-civ-spouse** individuals also have a significant number of high-income earners.''')
 
   # How does education-num relate to income?
 
-  avg_education_num_by_income = filtered_outlier_df.groupby("income_classification")["education-num"].mean()
+avg_education_num_by_income = filtered_outlier_df.groupby("income_classification")["education-num"].mean()
 
-  fig = px.pie(
+fig = px.pie(
     names=avg_education_num_by_income.index,
     values=avg_education_num_by_income.values,
     title="Average Education Level by Income",
     hole=0.5
 )
 
-  fig.update_traces(textinfo="percent+label")
+fig.update_traces(textinfo="percent+label")
 
-  fig.update_layout(
+fig.update_layout(
     height=800,
     width=800,
     title={
@@ -326,24 +326,24 @@ st.plotly_chart(fig)
     }
 )
 
-  st.plotly_chart(fig)
+st.plotly_chart(fig)
 
-  st.markdown('''
+st.markdown('''
   The chart shows the average education level by income. **More than half** of the individuals with higher education fall into the **high-income group**, while the **rest** have **low income**.
               ''')
 
   # What is the average work hour per week per workclass?
 
-  avg_hours_per_workclass = filtered_outlier_df.groupby("workclass")["hours-per-week"].mean().sort_values(ascending = False)
+avg_hours_per_workclass = filtered_outlier_df.groupby("workclass")["hours-per-week"].mean().sort_values(ascending = False)
 
-  fig = px.bar(
+fig = px.bar(
     x=avg_hours_per_workclass.values,
     y=avg_hours_per_workclass.index,
     orientation="h",
     title="Average Weekly Work Hours by Workclass"
 )
 
-  fig.update_layout(
+fig.update_layout(
     height=800,
     width=800,
     yaxis=dict(autorange="reversed"),
@@ -354,17 +354,17 @@ st.plotly_chart(fig)
         'font': {'size': 24}
     }
 )
-  st.plotly_chart(fig)
+st.plotly_chart(fig)
 
-  st.markdown('''
+st.markdown('''
   The chart shows that **self-employed** individuals with **incorporated businesses work** the most hours per week. On the other hand, those who have **never worked** have the lowest average weekly work hours
               ''')
 
   # Which race groups are most likely to earn above $50K?
 
-  race_high_income = filtered_outlier_df[filtered_outlier_df["income_classification"] == "High"]["race"].value_counts().sort_values(ascending = False).reset_index(name = "count")
+race_high_income = filtered_outlier_df[filtered_outlier_df["income_classification"] == "High"]["race"].value_counts().sort_values(ascending = False).reset_index(name = "count")
 
-  fig = px.bar(
+fig = px.bar(
     race_high_income,
     x="race",
     y="count",
@@ -372,7 +372,7 @@ st.plotly_chart(fig)
     title="Income Classification by Race"
 )
 
-  fig.update_layout(
+fig.update_layout(
     xaxis_title="race",
     yaxis_title="Count",
     height=800,
@@ -384,16 +384,16 @@ st.plotly_chart(fig)
         'font': {'size': 24}
     }
 )
-  st.plotly_chart(fig)
+st.plotly_chart(fig)
 
-  st.markdown('''
+st.markdown('''
   The chart shows that the number of income-classified individuals from the **White race** is significantly higher than all other racial groups. Other races like **Black**, **Asian-Pac-Islander**, **Amer-Indian-Eskimo**, and **Others** have much lower counts.''')
 
   # Which employment types (workclass) are most associated with high income?
 
-  workclass_income_counts = filtered_outlier_df.groupby("workclass")["income_classification"].value_counts().sort_values(ascending = False).reset_index(name = "count")
+workclass_income_counts = filtered_outlier_df.groupby("workclass")["income_classification"].value_counts().sort_values(ascending = False).reset_index(name = "count")
 
-  fig = px.bar(
+fig = px.bar(
     workclass_income_counts,
     x="workclass",
     y="count",
@@ -407,7 +407,7 @@ st.plotly_chart(fig)
     barmode="group"
 )
 
-  fig.update_layout(
+fig.update_layout(
     height=800,
     width=800,
     xaxis_tickangle=-45,
@@ -418,19 +418,19 @@ st.plotly_chart(fig)
         'font': {'size': 24}
     }
 )
-  st.plotly_chart(fig)
+st.plotly_chart(fig)
 
-  st.markdown('''
+st.markdown('''
   The chart shows that showing the number of people in different workclass categories classified by income levels **(Low and High)**. The majority of people in the **"Private"** workclass have **low income**, with a notable number also in the high-income category. Other categories like **"Self-emp-not-inc"**, **"Local-gov"**, **"State-gov"**, **"Federal-gov"**, **"Self-emp-inc"**, **"Without-pay"** and **"Never-worked"** have fewer people with varying low and high income distributions.
               ''')
 
   # What are the top 5 most common occupations among females?
-  top_female_occupations = filtered_outlier_df[filtered_outlier_df['sex'] == 'Female']['occupation'].value_counts().sort_values(ascending = False).head(5).reset_index(name = "count")
+top_female_occupations = filtered_outlier_df[filtered_outlier_df['sex'] == 'Female']['occupation'].value_counts().sort_values(ascending = False).head(5).reset_index(name = "count")
 
-  blue_palette = ["#08306B", "#2171B5", "#4292C6", "#6BAED6", "#C6DBEF"]
-  blue_shades = dict(zip(top_female_occupations["occupation"], blue_palette))
+blue_palette = ["#08306B", "#2171B5", "#4292C6", "#6BAED6", "#C6DBEF"]
+blue_shades = dict(zip(top_female_occupations["occupation"], blue_palette))
 
-  fig = px.treemap(
+fig = px.treemap(
     top_female_occupations,
     path=["occupation"],
     values="count",
@@ -439,7 +439,7 @@ st.plotly_chart(fig)
     color_discrete_map=blue_shades
 )
 
-  fig.update_layout(
+fig.update_layout(
     height=800,
     width=800,
     title={
@@ -449,17 +449,17 @@ st.plotly_chart(fig)
         'font': {'size': 24}
     }
 )
-  st.plotly_chart(fig)
+st.plotly_chart(fig)
 
-  st.markdown('''
+st.markdown('''
   The chart shows that showing the distribution of the most common occupations. The largest areas are **"Adm-clerical"** and **"Prof-specialty"** followed by **"Other-service"**, **"Sales"**, and **"Exec-managerial"** indicating their relative prevalence. The **size** of each rectangle represents the proportion of females in each occupation.
               ''')
 
 with tab3:
 
-  df_without_outlier = pd.read_csv("with_outliers_cleaned_adult_dataset.csv")
+df_without_outlier = pd.read_csv("with_outliers_cleaned_adult_dataset.csv")
 
-  filtered_without_outlier_df = df_without_outlier.copy()
+filtered_without_outlier_df = df_without_outlier.copy()
 
   if gender:
 
