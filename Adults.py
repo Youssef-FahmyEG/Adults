@@ -2,15 +2,15 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-df = pd.read_csv("/content/dataset_v1.csv")
+df = pd.read_csv("dataset_v1.csv")
 st.set_page_config(layout = "wide", page_title = "📊 Adults Dashboard")
-st.image("/content/adults.jpg" , use_container_width = True)
+st.image("adults.jpg" , use_container_width = True)
 st.markdown("""
     <h1 style='text-align: center; font-size: 60px; margin-top: 20px;'>
         Adults Analysis
     </h1>
 """, unsafe_allow_html = True)
-st.sidebar.image("/content/logo.png", use_container_width = True)
+st.sidebar.image("logo.png", use_container_width = True)
 
 gender = st.sidebar.multiselect("Gender", df["sex"].unique())
 race = st.sidebar.multiselect("Race", df["race"].unique())
@@ -91,7 +91,7 @@ with tab1:
 
 with tab2:
 
-  df_with_outlier = pd.read_csv("/content/with_outliers_cleaned_adult_dataset")
+  df_with_outlier = pd.read_csv("cleaned_without_outlierv2.csv")
 
   filtered_outlier_df = df_with_outlier.copy()
 
@@ -455,7 +455,7 @@ with tab2:
 
 with tab3:
 
-  df_without_outlier = pd.read_csv("/content/cleaned_without_outlierv2.csv")
+  df_without_outlier = pd.read_csv("with_outliers_cleaned_adult_dataset.csv")
 
   filtered_without_outlier_df = df_without_outlier.copy()
 
