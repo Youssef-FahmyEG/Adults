@@ -90,13 +90,13 @@ with tab1:
     st.plotly_chart(fig)
 
 with tab2:
-    
+
     df_with_outlier = pd.read_csv("cleaned_without_outlierv2.csv")
 
     filtered_outlier_df = df_with_outlier.copy()
 
     if gender:
-        
+
         filtered_outlier_df = filtered_outlier_df[filtered_outlier_df["sex"].isin(gender)]
 
     if race:
@@ -455,7 +455,7 @@ st.markdown('''
               ''')
 
 with tab3:
-    
+
 
     df_without_outlier = pd.read_csv("with_outliers_cleaned_adult_dataset.csv")
 
