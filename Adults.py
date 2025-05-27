@@ -179,13 +179,15 @@ with tab2:
   ''')
 
   # Which occupations are most represented among those earning >$50K?
-  top_occupations_high_income = filtered_outlier_df[filtered_outlier_df["income_classification"] == "High"]["occupation"].value_counts()
+top_occupations_high_income = df[df["income"] == ">50K"]["occupation"].value_counts().head(10)
+top_occupations_high_income_df = top_occupations_high_income.reset_index()
+top_occupations_high_income_df.columns = ['Occupation', 'Count']
 
-  fig = px.bar(
-    x=top_occupations_high_income.values,
-    y=top_occupations_high_income.index,
-    orientation="h",
-    title="Top Occupations (High Income)"
+fig = px.bar(
+    top_occupations_high_income_df,
+    x='Count',
+    y='Occupation',
+    orientation='h'
 )
 
   fig.update_layout(
