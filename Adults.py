@@ -678,15 +678,15 @@ st.plotly_chart(fig, key="chart_7")
 
   #----------------------------------------
 
-  avg_hours_per_workclass = filtered_without_outlier_df.groupby("workclass")["hours-per-week"].mean().sort_values(ascending=False)
-  fig = px.bar(
+avg_hours_per_workclass = filtered_without_outlier_df.groupby("workclass")["hours-per-week"].mean().sort_values(ascending=False)
+fig = px.bar(
     x=avg_hours_per_workclass.values,
     y=avg_hours_per_workclass.index,
     orientation="h",
     title="Average Weekly Work Hours by Workclass",
     color_discrete_map=green_shades1
 )
-  fig.update_layout(
+fig.update_layout(
     height=800,
     width=800,
     yaxis=dict(autorange="reversed"),
@@ -697,20 +697,20 @@ st.plotly_chart(fig, key="chart_7")
         'font': {'size': 24}
     }
 )
-  st.plotly_chart(fig, key="chart_8")
+st.plotly_chart(fig, key="chart_8")
 
    #----------------------------------------
 
-  race_colors = {
+race_colors = {
     "White": "#8dd3c7",
     "Black": "#ffffb3",
     "Asian-Pac-Islander": "#bebada",
     "Amer-Indian-Eskimo": "#fb8072",
     "Other": "#80b1d3"}
 
-  race_high_income = filtered_without_outlier_df[filtered_without_outlier_df["income_classification"] == "High"]["race"].value_counts().sort_values(ascending=False).reset_index(name="count")
+race_high_income = filtered_without_outlier_df[filtered_without_outlier_df["income_classification"] == "High"]["race"].value_counts().sort_values(ascending=False).reset_index(name="count")
 
-  fig = px.bar(
+fig = px.bar(
     race_high_income,
     x="race",
     y="count",
@@ -718,7 +718,7 @@ st.plotly_chart(fig, key="chart_7")
     title="Income Classification by Race"
 )
 
-  fig.update_layout(
+fig.update_layout(
     xaxis_title="race",
     yaxis_title="Count",
     height=800,
@@ -731,13 +731,13 @@ st.plotly_chart(fig, key="chart_7")
     }
 )
 
-  st.plotly_chart(fig, key="chart_9")
+st.plotly_chart(fig, key="chart_9")
 
   #----------------------------------------
 
-  workclass_income_counts = filtered_without_outlier_df.groupby("workclass")["income_classification"].value_counts().sort_values(ascending=False).reset_index(name="count")
+workclass_income_counts = filtered_without_outlier_df.groupby("workclass")["income_classification"].value_counts().sort_values(ascending=False).reset_index(name="count")
 
-  fig = px.bar(
+fig = px.bar(
     workclass_income_counts,
     x="workclass",
     y="count",
@@ -751,7 +751,7 @@ st.plotly_chart(fig, key="chart_7")
     barmode="group",
     color_discrete_map=green_shades
 )
-  fig.update_layout(
+fig.update_layout(
     height=800,
     width=800,
     xaxis_tickangle=-45,
@@ -762,16 +762,16 @@ st.plotly_chart(fig, key="chart_7")
         'font': {'size': 24}
     }
 )
-  st.plotly_chart(fig, key="chart_10")
+st.plotly_chart(fig, key="chart_10")
 
    #----------------------------------------
 
-  green_palette = ['#3ca96b', '#5bc27c', '#81d68d', '#a8e6a1', '#d0f0c0']
-  green_shades2 = dict(zip(top_female_occupations["occupation"], green_palette))
+green_palette = ['#3ca96b', '#5bc27c', '#81d68d', '#a8e6a1', '#d0f0c0']
+green_shades2 = dict(zip(top_female_occupations["occupation"], green_palette))
 
-  top_female_occupations = filtered_without_outlier_df[filtered_without_outlier_df['sex'] == 'Female']['occupation'].value_counts().sort_values(ascending=False).head(5).reset_index(name="count")
+top_female_occupations = filtered_without_outlier_df[filtered_without_outlier_df['sex'] == 'Female']['occupation'].value_counts().sort_values(ascending=False).head(5).reset_index(name="count")
 
-  fig = px.treemap(
+fig = px.treemap(
     top_female_occupations,
     path=["occupation"],
     values="count",
@@ -779,7 +779,7 @@ st.plotly_chart(fig, key="chart_7")
     color_discrete_map=green_shades2,
     title="Top 5 Occupations Among Females"
 )
-  fig.update_layout(
+fig.update_layout(
     height=800,
     width=800,
     title={
@@ -789,7 +789,7 @@ st.plotly_chart(fig, key="chart_7")
         'font': {'size': 24}
     }
 )
-  st.plotly_chart(fig, key="chart_11")
+st.plotly_chart(fig, key="chart_11")
 
 
 with tab4 :
