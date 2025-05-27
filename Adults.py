@@ -93,22 +93,22 @@ with tab2:
     
     df_with_outlier = pd.read_csv("cleaned_without_outlierv2.csv")
 
-   filtered_outlier_df = df_with_outlier.copy()
+    filtered_outlier_df = df_with_outlier.copy()
 
-   if gender:
-       
-       filtered_outlier_df = filtered_outlier_df[filtered_outlier_df["sex"].isin(gender)]
+    if gender:
+        
+        filtered_outlier_df = filtered_outlier_df[filtered_outlier_df["sex"].isin(gender)]
 
-   if race:
-       filtered_outlier_df = filtered_outlier_df[filtered_outlier_df["race"].isin(race)]
+    if race:
+        filtered_outlier_df = filtered_outlier_df[filtered_outlier_df["race"].isin(race)]
 
-   if country:
-       filtered_outlier_df = filtered_outlier_df[filtered_outlier_df["native-country"].isin(country)]
+    if country:
+        filtered_outlier_df = filtered_outlier_df[filtered_outlier_df["native-country"].isin(country)]
 
  # The distribution of income levels across different education levels?
-   grouped = filtered_outlier_df.groupby("education")["income_classification"].value_counts().sort_values(ascending=False).reset_index(name="count")
+    grouped = filtered_outlier_df.groupby("education")["income_classification"].value_counts().sort_values(ascending=False).reset_index(name="count")
 
-   fig = px.bar(
+    fig = px.bar(
         grouped,
         x="education",
         y="count",
@@ -122,7 +122,7 @@ with tab2:
         }
     )
 
-   fig.update_layout(
+    fig.update_layout(
     title={
         'text': "Income Distribution by Education Level",
         'x': 0.5,
@@ -142,23 +142,23 @@ with tab2:
     width=800
 )
 
-   st.plotly_chart(fig)
+    st.plotly_chart(fig)
 
-   st.markdown('''
+    st.markdown('''
   The chart shows that most people with lower education levels like **High School** and **Some college** have low income.
   People with higher education like **Bachelors** and **Masters** are more likely to have high income.
               ''')
 
 # What is the gender distribution among high-income earners?
-   gender_distribution_high_income = filtered_outlier_df[filtered_outlier_df["income_classification"] == "High"]["sex"].value_counts()
+    gender_distribution_high_income = filtered_outlier_df[filtered_outlier_df["income_classification"] == "High"]["sex"].value_counts()
 
-   fig = px.pie(
+    fig = px.pie(
     names=gender_distribution_high_income.index,
     values=gender_distribution_high_income.values)
 
-   fig.update_traces(textinfo="percent+label")
+    fig.update_traces(textinfo="percent+label")
 
-   fig.update_layout(
+    fig.update_layout(
     title={
         'text': "Gender Distribution (High Income)",
         'x': 0.5,
