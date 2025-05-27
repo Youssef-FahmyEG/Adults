@@ -190,7 +190,7 @@ fig = px.bar(
     orientation='h'
 )
 
-  fig.update_layout(
+fig.update_layout(
     title={
         'text': "Top Occupations (High Income)",
         'x': 0.5,
