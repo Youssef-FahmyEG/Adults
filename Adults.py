@@ -456,20 +456,21 @@ st.markdown('''
               ''')
 
 with tab3:
+    
 
-df_without_outlier = pd.read_csv("with_outliers_cleaned_adult_dataset.csv")
+    df_without_outlier = pd.read_csv("with_outliers_cleaned_adult_dataset.csv")
 
-filtered_without_outlier_df = df_without_outlier.copy()
+    filtered_without_outlier_df = df_without_outlier.copy()
 
-  if gender:
+    if gender:
 
-    filtered_without_outlier_df = filtered_without_outlier_df[filtered_without_outlier_df["sex"].isin(gender)]
+        filtered_without_outlier_df = filtered_without_outlier_df[filtered_without_outlier_df["sex"].isin(gender)]
 
-  if race:
-    filtered_without_outlier_df = filtered_without_outlier_df[filtered_without_outlier_df["race"].isin(race)]
+    if race:
+        filtered_without_outlier_df = filtered_without_outlier_df[filtered_without_outlier_df["race"].isin(race)]
 
-  if country:
-    filtered_without_outlier_df = filtered_without_outlier_df[filtered_without_outlier_df["native-country"].isin(country)]
+    if country:
+        filtered_without_outlier_df = filtered_without_outlier_df[filtered_without_outlier_df["native-country"].isin(country)]
 
  # The distribution of income levels across different education levels?
   grouped = filtered_without_outlier_df.groupby("education")["income_classification"].value_counts().sort_values(ascending=False).reset_index(name="count")
