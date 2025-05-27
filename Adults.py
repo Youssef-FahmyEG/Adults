@@ -204,7 +204,7 @@ fig.update_layout(
     yaxis=dict(autorange="reversed")
 )
 
-  st.plotly_chart(fig)
+st.plotly_chart(fig)
 
   st.markdown('''
   The chart shows that the highest-paying occupations are **professional specialties** and **executive-managerial roles**, followed by **sales** and **craft-related jobs**.
