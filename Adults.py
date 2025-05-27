@@ -172,25 +172,25 @@ with tab2:
 )
 
 
-   st.plotly_chart(fig)
+    st.plotly_chart(fig)
 
-   st.markdown('''
+    st.markdown('''
   The chart shows that **males** represent the majority of high-income earners compared to **females**.
   ''')
 
   # Which occupations are most represented among those earning >$50K?
- top_occupations_high_income = df[df["income"] == ">50K"]["occupation"].value_counts().head(10)
- top_occupations_high_income_df = top_occupations_high_income.reset_index()
- top_occupations_high_income_df.columns = ['Occupation', 'Count']
+  top_occupations_high_income = df[df["income"] == ">50K"]["occupation"].value_counts().head(10)
+  top_occupations_high_income_df = top_occupations_high_income.reset_index()
+  top_occupations_high_income_df.columns = ['Occupation', 'Count']
 
- fig = px.bar(
+  fig = px.bar(
     top_occupations_high_income_df,
     x='Count',
     y='Occupation',
     orientation='h'
 )
 
- fig.update_layout(
+  fig.update_layout(
     title={
         'text': "Top Occupations (High Income)",
         'x': 0.5,
@@ -204,16 +204,16 @@ with tab2:
     yaxis=dict(autorange="reversed")
 )
 
- st.plotly_chart(fig)
+  st.plotly_chart(fig)
 
- st.markdown('''
+  st.markdown('''
   The chart shows that the highest-paying occupations are **professional specialties** and **executive-managerial roles**, followed by **sales** and **craft-related jobs**.
               ''')
 
   # What is the correlation between weekly work hours and income?
- correlation = round(filtered_outlier_df["hours-per-week"].corr(filtered_outlier_df["income_numeric"]),2)
+  correlation = round(filtered_outlier_df["hours-per-week"].corr(filtered_outlier_df["income_numeric"]),2)
 
- fig = px.scatter(
+  fig = px.scatter(
     filtered_outlier_df,
     x="hours-per-week",
     y="income_numeric",
@@ -224,7 +224,7 @@ with tab2:
     }
 )
 
- fig.update_layout(
+  fig.update_layout(
     title={
         'text': f"Income vs Hours per Week (Correlation = {correlation})",
         'x': 0.5,
@@ -237,16 +237,16 @@ with tab2:
     width=800
 )
 
- st.plotly_chart(fig)
+  st.plotly_chart(fig)
 
- st.markdown('''
+  st.markdown('''
   The chart shows that there is a **weak positive correlation** between hours worked per week and income level''')
 
   # Which top 10 countries are most common among high-income individuals?
 
- top_countries_high_income = filtered_outlier_df[filtered_outlier_df["income_classification"] == "High"]["native-country"].value_counts().reset_index().head(10)
+  top_countries_high_income = filtered_outlier_df[filtered_outlier_df["income_classification"] == "High"]["native-country"].value_counts().reset_index().head(10)
 
- fig = px.choropleth(
+  fig = px.choropleth(
     top_countries_high_income,
     locations="native-country",
     locationmode="country names",
