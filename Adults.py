@@ -518,13 +518,13 @@ st.plotly_chart(fig, key="chart_1")
 
   #----------------------------------------
 
-   gender_distribution_high_income = filtered_without_outlier_df[filtered_without_outlier_df["income_classification"] == "High"]["sex"].value_counts()
+gender_distribution_high_income = filtered_without_outlier_df[filtered_without_outlier_df["income_classification"] == "High"]["sex"].value_counts()
 
-   gender_colors = {
+gender_colors = {
     "Male": "#006d2c",
     "Female": "#a1d99b"
 }
-   fig = px.pie(
+fig = px.pie(
     names=gender_distribution_high_income.index,
     values=gender_distribution_high_income.values,
     color=gender_distribution_high_income.index,
@@ -532,8 +532,8 @@ st.plotly_chart(fig, key="chart_1")
 
 )
 
- fig.update_traces(textinfo="percent+label")
- fig.update_layout(
+fig.update_traces(textinfo="percent+label")
+fig.update_layout(
     title={
         'text': "Gender Distribution (High Income)",
         'x': 0.5,
@@ -543,18 +543,18 @@ st.plotly_chart(fig, key="chart_1")
     height=800,
     width=800
 )
-  st.plotly_chart(fig, key="chart_2")
+st.plotly_chart(fig, key="chart_2")
 
   #----------------------------------------
 
-  top_occupations_high_income = filtered_without_outlier_df[filtered_without_outlier_df["income_classification"] == "High"]["occupation"].value_counts()
+top_occupations_high_income = filtered_without_outlier_df[filtered_without_outlier_df["income_classification"] == "High"]["occupation"].value_counts()
 
-  fig = px.bar(
+fig = px.bar(
     x=top_occupations_high_income.values,
     y=top_occupations_high_income.index,
     orientation="h",
     title="Top Occupations (High Income)")
-  fig.update_layout(
+fig.update_layout(
     title={
         'text': "Top Occupations (High Income)",
         'x': 0.5,
@@ -565,12 +565,12 @@ st.plotly_chart(fig, key="chart_1")
     width=800,
     yaxis=dict(autorange="reversed")
 )
-  st.plotly_chart(fig, key="chart_3")
+st.plotly_chart(fig, key="chart_3")
 
     #----------------------------------------
 
-  correlation = round(filtered_without_outlier_df["hours-per-week"].corr(filtered_without_outlier_df["income_numeric"]), 2)
-  fig = px.scatter(
+correlation = round(filtered_without_outlier_df["hours-per-week"].corr(filtered_without_outlier_df["income_numeric"]), 2)
+fig = px.scatter(
     filtered_without_outlier_df,
     x="hours-per-week",
     y="income_numeric",
@@ -582,7 +582,7 @@ st.plotly_chart(fig, key="chart_1")
         "income_numeric": "Income (0 = <=50K, 1 = >50K)"
     }
 )
-  fig.update_layout(
+fig.update_layout(
     title={
         'text': f"Income vs Hours per Week (Correlation = {correlation})",
         'x': 0.5,
@@ -592,15 +592,15 @@ st.plotly_chart(fig, key="chart_1")
     height=800,
     width=800
 )
-  st.plotly_chart(fig, key="chart_4")
+st.plotly_chart(fig, key="chart_4")
 
   #----------------------------------------
 
-  top_countries_high_income = filtered_without_outlier_df[filtered_without_outlier_df["income_classification"] == "High"]["native-country"].value_counts().reset_index()
-  top_countries_high_income.columns = ["native-country", "count"]
-  top_countries_high_income = top_countries_high_income.head(10)
+top_countries_high_income = filtered_without_outlier_df[filtered_without_outlier_df["income_classification"] == "High"]["native-country"].value_counts().reset_index()
+top_countries_high_income.columns = ["native-country", "count"]
+top_countries_high_income = top_countries_high_income.head(10)
 
-  fig = px.choropleth(
+fig = px.choropleth(
     top_countries_high_income,
     locations="native-country",
     locationmode="country names",
@@ -608,7 +608,7 @@ st.plotly_chart(fig, key="chart_1")
     color_continuous_scale="Greens",
     title="Top 10 Countries with High Income"
 )
-  fig.update_layout(
+fig.update_layout(
     height=800,
     width=800,
     title={
@@ -618,13 +618,13 @@ st.plotly_chart(fig, key="chart_1")
         'font': {'size': 24}
     }
 )
-  st.plotly_chart(fig, key="chart_5")
+st.plotly_chart(fig, key="chart_5")
 
   #----------------------------------------
 
-  income_by_marital_status = filtered_without_outlier_df.groupby("marital-status")["income_classification"].value_counts().sort_values(ascending=False).reset_index(name="count")
+income_by_marital_status = filtered_without_outlier_df.groupby("marital-status")["income_classification"].value_counts().sort_values(ascending=False).reset_index(name="count")
 
-  fig = px.bar(
+fig = px.bar(
     income_by_marital_status,
     x="marital-status",
     y="count",
@@ -633,7 +633,7 @@ st.plotly_chart(fig, key="chart_1")
     title="Income Classification by Marital Status",
     color_discrete_map=green_shades
 )
-  fig.update_layout(
+fig.update_layout(
     xaxis_title="Marital Status",
     yaxis_title="Count",
     height=800,
@@ -645,17 +645,17 @@ st.plotly_chart(fig, key="chart_1")
         'font': {'size': 24}
     }
 )
-  st.plotly_chart(fig, key="chart_6")
+st.plotly_chart(fig, key="chart_6")
 
     #----------------------------------------
 
-  green_shades1 = {
+green_shades1 = {
     "Low": "#a1d99b",
     "High": "#006d2c"
 }
-  avg_education_num_by_income = filtered_without_outlier_df.groupby("income_classification")["education-num"].mean()
+avg_education_num_by_income = filtered_without_outlier_df.groupby("income_classification")["education-num"].mean()
 
-  fig = px.pie(
+fig = px.pie(
     names=avg_education_num_by_income.index,
     values=avg_education_num_by_income.values,
     title="Average Education Level by Income",
@@ -663,8 +663,8 @@ st.plotly_chart(fig, key="chart_1")
     color_discrete_map=green_shades1
 
 )
-  fig.update_traces(textinfo="percent+label")
-  fig.update_layout(
+fig.update_traces(textinfo="percent+label")
+fig.update_layout(
     height=800,
     width=800,
     title={
@@ -674,7 +674,7 @@ st.plotly_chart(fig, key="chart_1")
         'font': {'size': 24}
     }
 )
-  st.plotly_chart(fig, key="chart_7")
+st.plotly_chart(fig, key="chart_7")
 
   #----------------------------------------
 
