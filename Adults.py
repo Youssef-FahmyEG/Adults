@@ -4,7 +4,7 @@ import plotly.express as px
 
 df = pd.read_csv("dataset_v1.csv")
 st.set_page_config(layout = "wide", page_title = "📊 Adults Dashboard")
-st.image("adults.jpg" , use_container_width = True)
+st.image("Adults.jpg", use_container_width=True)
 st.markdown("""
     <h1 style='text-align: center; font-size: 60px; margin-top: 20px;'>
         Adults Analysis
