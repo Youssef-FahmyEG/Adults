@@ -816,7 +816,7 @@ The dashboard analyzes adult dataset to predict income levels **(>50K or <=50K)*
 
 <b>Female Occupations:</b> **Administrative** , **clerical** , and **professional specialties** are the most common occupations among **females** .
 
-<b>Ourliers:</b> After analyzing the data, the difference between data **with outlier** and **without outlier** indicate that outliers have little significant impact on the overall trends and distributions.
+<b>Outliers:</b> After analyzing the data, the difference between data **with outlier** and **without outlier** indicate that outliers have little significant impact on the overall trends and distributions.
 )''', unsafe_allow_html=True)
 
   st.markdown("""
