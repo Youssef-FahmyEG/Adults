@@ -18,7 +18,7 @@ It helps organizations and analysts uncover **income distribution patterns** bas
 ...
 
 ## 📦 Dataset Overview
--  **Rows:** 32,561  
+-  **Rows:** 48.842 
 -  **Columns:** 15
 
 ---
